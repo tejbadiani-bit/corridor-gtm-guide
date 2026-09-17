@@ -2,7 +2,7 @@
 
 Enablement and demo guide, built by **SaaScend** for Corridor.
 
-Covers the lead-to-revenue process delivered in Phase 1: the seven-stage model, the two
+A task-first guide to using Corridor's Salesforce day to day: working a lead, moving a deal, getting pricing approved, and what to do when a stage gate stops you.
 qualification gates, renewal and co-term automation, activity recency, and the reporting layer —
 with click paths and real example records from the build org.
 

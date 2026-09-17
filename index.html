@@ -3,564 +3,474 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Enablement and demo guide for Corridor's Phase 1 Salesforce GTM Foundation, built by SaaScend.">
+<meta name="description" content="How to use Corridor's Salesforce, day to day. Built by SaaScend.">
 <meta name="robots" content="noindex,nofollow">
-<title>Corridor GTM Foundation Guide</title>
+<title>Corridor Salesforce Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --ink:#0E1726; --ink2:#17233A; --ink3:#22314C;
-  --bg:#FFFFFF; --paper:#F4F6F9; --paper2:#EAEFF5;
-  --line:#DDE3EC; --line2:#C6D1E0;
-  --tx:#2C3A4F; --mut:#64748B; --faint:#94A3B4;
-  --acc:#00AEEF; --accd:#0079A8; --teal:#80B3C6;
-  --ok:#2E7D5B; --warn:#B46A1F; --stop:#B3403A;
+  --ink:#0E1726; --ink2:#17233A;
+  --bg:#FFFFFF; --paper:#F5F7FA; --paper2:#EAEFF5;
+  --line:#E2E8F0; --line2:#CBD5E1;
+  --tx:#1F2937; --mut:#5B6B80; --faint:#94A3B4;
+  --acc:#00AEEF; --accd:#0079A8;
+  --ok:#2E7D5B; --okbg:#EAF5EF;
+  --warn:#B46A1F; --warnbg:#FDF4E7;
+  --stop:#B3403A; --stopbg:#FBEDEC;
   --disp:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
-:root:not([data-theme="light"]){}
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#0E1726; --paper:#17233A; --paper2:#1C2A42;
-    --line:#26354F; --line2:#33455F;
-    --tx:#D7E1EE; --mut:#9DB3CC; --faint:#6B8199;
+    --line:#26354F; --line2:#3A4B66;
+    --tx:#E2E9F2; --mut:#A3B6CC; --faint:#6B8199;
     --acc:#3FC4F5; --accd:#7FD6F8;
-    --ok:#5FB98E; --warn:#D9A05B; --stop:#D9736D;
+    --ok:#6CC49A; --okbg:#16302A; --warn:#E0A961; --warnbg:#332616; --stop:#E08B85; --stopbg:#331D1C;
   }
 }
 :root[data-theme="dark"]{
   --bg:#0E1726; --paper:#17233A; --paper2:#1C2A42;
-  --line:#26354F; --line2:#33455F;
-  --tx:#D7E1EE; --mut:#9DB3CC; --faint:#6B8199;
+  --line:#26354F; --line2:#3A4B66;
+  --tx:#E2E9F2; --mut:#A3B6CC; --faint:#6B8199;
   --acc:#3FC4F5; --accd:#7FD6F8;
-  --ok:#5FB98E; --warn:#D9A05B; --stop:#D9736D;
+  --ok:#6CC49A; --okbg:#16302A; --warn:#E0A961; --warnbg:#332616; --stop:#E08B85; --stopbg:#331D1C;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--tx);font-family:var(--body);margin:0;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1080px;margin:0 auto;padding-left:20px;padding-right:20px}
-.logo-hero{height:26px;width:auto;display:block;margin-bottom:22px}
-.brand{display:flex;align-items:center;gap:8px}
-.logo-sm{height:17px;width:auto}
-:root:not([data-theme="dark"]) .logo-sm{filter:invert(1) hue-rotate(180deg) saturate(1.4)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo-sm{filter:none}}
-:root[data-theme="dark"] .logo-sm{filter:none}
-.bsep{color:var(--acc)}
-figure{margin:14px 0 0;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--paper)}
-figure img{display:block;width:100%;height:auto}
-figure figcaption{font-size:11.5px;color:var(--mut);padding:9px 13px;border-top:1px solid var(--line);background:var(--bg)}
-figure figcaption b{color:var(--tx)}
-.shotfull{max-height:560px;overflow-y:auto}
-.shotfull img{max-width:none;width:100%}
+body{background:var(--bg);color:var(--tx);font-family:var(--body);margin:0;line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding-left:20px;padding-right:20px}
 
-/* header */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
-.topin{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-.brand{font-family:var(--disp);font-weight:600;font-size:14px;color:var(--tx);letter-spacing:-.01em;margin-right:auto}
-.brand span{color:var(--acc)}
-nav a{font-size:12px;color:var(--mut);text-decoration:none;padding:5px 8px;border-radius:3px}
-nav a:hover,nav a:focus-visible{color:var(--tx);background:var(--paper);outline:none}
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:var(--bg);border-bottom:1px solid var(--line)}
+.topin{max-width:820px;margin:0 auto;padding:11px 20px;display:flex;gap:12px;align-items:center}
+.topin .lg{height:16px;width:auto;filter:invert(1) hue-rotate(180deg) saturate(1.4)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .topin .lg{filter:none}}
+:root[data-theme="dark"] .topin .lg{filter:none}
+.topin .nm{font-family:var(--disp);font-size:13.5px;font-weight:600;color:var(--tx);margin-right:auto}
+.topin a.oo{font-size:12.5px;color:var(--accd);text-decoration:none;border:1px solid var(--line2);padding:5px 11px;border-radius:4px;white-space:nowrap}
+.topin a.oo:hover,.topin a.oo:focus-visible{background:var(--paper);outline:none}
 
 /* hero */
-.hero{background:var(--ink);color:#fff;padding-block:52px;margin-bottom:40px}
-.hero .wrap{max-width:1080px}
-.eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
-.hero h1{font-family:var(--disp);font-size:clamp(30px,5vw,46px);line-height:1.05;font-weight:600;letter-spacing:-.022em;margin:0 0 14px;color:#fff;text-wrap:balance}
-.hero p{font-size:15px;color:#9DB3CC;max-width:62ch;margin:0}
-.herometa{display:flex;gap:26px;flex-wrap:wrap;margin-top:26px;font-size:12px;color:#9DB3CC}
-.herometa b{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#6B8199;font-weight:600;margin-bottom:4px}
+.hero{background:var(--ink);color:#fff;padding-block:46px}
+.hero .lg{height:22px;width:auto;display:block;margin-bottom:24px}
+.hero h1{font-family:var(--disp);font-size:clamp(28px,5vw,40px);line-height:1.08;font-weight:600;letter-spacing:-.02em;margin:0 0 14px;color:#fff}
+.hero p{font-size:16.5px;color:#A9BDD4;margin:0;max-width:56ch}
 
-h2{font-family:var(--disp);font-size:clamp(21px,3vw,27px);font-weight:600;letter-spacing:-.018em;margin:0 0 6px;color:var(--tx);text-wrap:balance}
-h3{font-family:var(--disp);font-size:16px;font-weight:600;margin:0 0 6px;color:var(--tx);letter-spacing:-.008em}
-.lede{color:var(--mut);font-size:14px;margin:0 0 22px;max-width:70ch}
-section{margin-bottom:52px;scroll-margin-top:70px}
+/* contents */
+.toc{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px 20px;margin:32px 0 40px}
+.toc h2{font-family:var(--disp);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:600}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.toc li{font-size:14.5px;margin-bottom:7px;break-inside:avoid}
+.toc a{color:var(--tx);text-decoration:none}
+.toc a:hover,.toc a:focus-visible{color:var(--accd);text-decoration:underline;outline:none}
+@media(max-width:620px){.toc ol{columns:1}}
 
-/* bowtie */
-.bow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:12px}
-.bs{border-radius:3px;padding:12px 10px;color:#fff;display:flex;flex-direction:column;gap:5px;min-height:112px}
-.bs .n{font-family:var(--mono);font-size:9.5px;opacity:.75}
-.bs .t{font-family:var(--disp);font-size:13px;font-weight:600;line-height:1.15}
-.bs .d{font-size:10.5px;line-height:1.35;opacity:.85}
-.bowlab{display:grid;grid-template-columns:4fr 3fr;gap:6px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:600}
+/* task section */
+.task{margin-bottom:56px;scroll-margin-top:72px}
+.task > h2{font-family:var(--disp);font-size:clamp(22px,3.4vw,28px);font-weight:600;letter-spacing:-.018em;margin:0 0 4px;color:var(--tx)}
+.task > .who{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accd);font-weight:600;margin:0 0 14px}
+.task > p{font-size:16px;color:var(--mut);margin:0 0 18px}
 
-/* pillars */
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:16px 18px}
-.card .num{font-family:var(--mono);font-size:10px;color:var(--accd);margin-bottom:6px}
-.card p{font-size:12.5px;color:var(--mut);margin:0 0 10px}
-.chips{display:flex;gap:5px;flex-wrap:wrap}
-.chip{font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:2px;background:var(--paper2);color:var(--mut);border:1px solid var(--line)}
-.chip.acc{background:rgba(0,174,239,.11);color:var(--accd);border-color:rgba(0,174,239,.3)}
-.chip.ok{background:rgba(46,125,91,.11);color:var(--ok);border-color:rgba(46,125,91,.3)}
-.chip.stop{background:rgba(179,64,58,.1);color:var(--stop);border-color:rgba(179,64,58,.28)}
-.chip.warn{background:rgba(180,106,31,.11);color:var(--warn);border-color:rgba(180,106,31,.3)}
+ol.steps{counter-reset:s;list-style:none;margin:0 0 4px;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding-left:38px;margin-bottom:13px;font-size:15.5px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;
+  background:var(--ink);color:#fff;font-family:var(--mono);font-size:12px;display:flex;align-items:center;justify-content:center}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) ol.steps li::before{background:var(--acc);color:#0E1726}}
+:root[data-theme="dark"] ol.steps li::before{background:var(--acc);color:#0E1726}
+ol.steps b{font-weight:600;color:var(--tx)}
 
-/* stage blocks */
-.stage{border:1px solid var(--line);border-radius:4px;margin-bottom:14px;overflow:hidden;background:var(--bg)}
-.sh{display:flex;gap:14px;align-items:flex-start;padding:15px 18px;background:var(--paper);border-bottom:1px solid var(--line);flex-wrap:wrap}
-.sh .idx{font-family:var(--mono);font-size:11px;color:var(--accd);padding-top:3px}
-.sh .ttl{flex:1 1 220px}
-.sh h3{margin:0 0 3px}
-.sh .sub{font-size:12px;color:var(--mut)}
-.sb{padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.blk h4{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accd);margin:0 0 8px;font-weight:600}
-.blk.sys h4{color:var(--teal)}
-.blk.watch h4{color:var(--warn)}
-ul.t{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-ul.t li{font-size:12.5px;line-height:1.45;display:flex;gap:8px}
-ul.t li::before{content:"";flex:0 0 auto;width:4px;height:4px;border-radius:50%;background:var(--acc);margin-top:7px}
-ul.t.sys li::before{background:var(--teal)}
-ul.t.watch li::before{background:var(--warn)}
+.auto{background:var(--okbg);border:1px solid rgba(46,125,91,.22);border-radius:6px;padding:14px 17px;margin:18px 0}
+.auto h3{font-family:var(--disp);font-size:13.5px;font-weight:600;color:var(--ok);margin:0 0 7px}
+.auto ul{margin:0;padding-left:18px}
+.auto li{font-size:14.5px;color:var(--tx);margin-bottom:5px}
 
-/* click path */
-.cp{background:var(--ink);color:#D7E1EE;border-radius:4px;padding:14px 16px;margin:0}
-.cp h4{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--acc);margin:0 0 9px;font-weight:600}
-.cp ol{margin:0;padding-left:17px;font-size:12.5px;line-height:1.6}
-.cp ol li{margin-bottom:4px}
-.cp code{font-family:var(--mono);font-size:.86em;background:#22314C;border-radius:2px;padding:1px 5px;color:#BFD4E8}
-.rec{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;background:rgba(0,174,239,.14);border:1px solid rgba(0,174,239,.35);color:#7FD6F8;padding:2px 8px;border-radius:3px;text-decoration:none;margin-top:9px}
-.rec:hover,.rec:focus-visible{background:rgba(0,174,239,.24);outline:none}
+.heads{background:var(--warnbg);border:1px solid rgba(180,106,31,.22);border-radius:6px;padding:14px 17px;margin:18px 0}
+.heads h3{font-family:var(--disp);font-size:13.5px;font-weight:600;color:var(--warn);margin:0 0 7px}
+.heads p{font-size:14.5px;color:var(--tx);margin:0}
 
-code,.mono{font-family:var(--mono);font-size:.87em;background:var(--paper2);border:1px solid var(--line);border-radius:2px;padding:1px 5px;color:var(--tx)}
+figure{margin:20px 0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--paper)}
+figure img{display:block;width:100%;height:auto}
+figure figcaption{font-size:13px;color:var(--mut);padding:10px 14px;border-top:1px solid var(--line);background:var(--bg)}
 
-table{width:100%;border-collapse:collapse;font-size:12.5px}
-th{text-align:left;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);font-weight:600;padding:0 10px 8px 0;border-bottom:1px solid var(--line2)}
-td{padding:9px 10px 9px 0;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+.try{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0 0;padding:13px 15px;background:var(--paper);border:1px solid var(--line);border-radius:6px}
+.try .lbl{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:600}
+a.btn{display:inline-block;font-size:14px;font-weight:500;color:#fff;background:var(--ink);padding:7px 14px;border-radius:5px;text-decoration:none}
+a.btn:hover,a.btn:focus-visible{background:var(--ink2);outline:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) a.btn{background:var(--acc);color:#0E1726}}
+:root[data-theme="dark"] a.btn{background:var(--acc);color:#0E1726}
+a.btn.ghost{background:transparent;color:var(--accd);border:1px solid var(--line2)}
+a.btn.ghost:hover{background:var(--paper2)}
+
+.tw{overflow-x:auto;margin:18px 0}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+th{text-align:left;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;padding:0 12px 9px 0;border-bottom:1px solid var(--line2)}
+td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
 td.k{font-weight:600;color:var(--tx)}
-.tw{overflow-x:auto}
+code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-radius:3px;padding:2px 6px;color:var(--tx)}
 
-/* workflow spotlight */
-.wf{border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:0 4px 4px 0;padding:16px 18px;margin-bottom:14px;background:var(--bg)}
-.wf.gold{border-left-color:var(--ok)}
-.wf .lab{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accd);font-weight:600;margin:0 0 5px}
-.wf.gold .lab{color:var(--ok)}
-.wf p{font-size:13px;color:var(--mut);margin:0 0 12px}
-
-/* run sheet */
-.run{counter-reset:step;display:flex;flex-direction:column;gap:9px}
-.run .r{display:flex;gap:13px;align-items:flex-start;padding:13px 15px;background:var(--paper);border:1px solid var(--line);border-radius:4px}
-.run .r::before{counter-increment:step;content:counter(step);font-family:var(--mono);font-size:11px;color:#fff;background:var(--ink);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:1px}
-.run .r .b{flex:1}
-.run .r b{display:block;font-family:var(--disp);font-size:13.5px;color:var(--tx);margin-bottom:3px}
-.run .r span{font-size:12.5px;color:var(--mut)}
-.run .r .say{display:block;margin-top:7px;font-size:12.5px;color:var(--tx);font-style:italic;border-left:2px solid var(--line2);padding-left:10px}
-
-.note{font-size:12.5px;color:var(--mut);border-left:2px solid var(--line2);padding-left:12px;margin-top:14px}
-.note b{color:var(--tx)}
-.foot{border-top:1px solid var(--line);padding-block:26px;margin-top:20px;font-size:12px;color:var(--faint)}
-
-/* role lens */
-.lens{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
-.lens span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-right:4px}
-.lens button{font-family:var(--body);font-size:12px;padding:5px 11px;border-radius:3px;border:1px solid var(--line2);background:var(--bg);color:var(--mut);cursor:pointer}
-.lens button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.lens button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
-.dim{opacity:.32}
-
-@media (max-width:860px){
-  .bow{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .bowlab{display:none}
-  .herometa{gap:16px}
-}
+.rule{border:none;border-top:1px solid var(--line);margin:0 0 44px}
+.foot{border-top:1px solid var(--line);padding-block:30px;margin-top:30px;font-size:13.5px;color:var(--mut)}
+.foot .lg{height:19px;width:auto;display:block;margin-bottom:13px;filter:invert(1) hue-rotate(180deg) saturate(1.4)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .foot .lg{filter:none}}
+:root[data-theme="dark"] .foot .lg{filter:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 
-
 <header class="top">
   <div class="topin">
-    <div class="brand"><img src="assets/saascend-logo-white.png" alt="SaaScend" class="logo-sm"><span class="bsep">&times;</span> Corridor &middot; GTM Foundation</div>
-    <nav>
-      <a href="#bowtie">Journey</a>
-      <a href="#pillars">Capabilities</a>
-      <a href="#stages">Walkthrough</a>
-      <a href="#workflows">Key workflows</a>
-      <a href="#runsheet">Run sheet</a>
-      <a href="#reference">Reference</a>
-    </nav>
+    <img src="assets/saascend-logo-white.png" alt="SaaScend" class="lg">
+    <span class="nm">Corridor Salesforce Guide</span>
+    <a class="oo" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/page/home" target="_blank" rel="noopener">Open Salesforce &rarr;</a>
   </div>
 </header>
 
 <div class="hero">
   <div class="wrap">
-    <img src="assets/saascend-logo-white.png" alt="SaaScend" class="logo-hero">
-    <p class="eyebrow">Phase 1 &middot; Enablement &amp; Demo Guide</p>
-    <h1>Salesforce GTM Foundation</h1>
-    <p>Every click path, every example record, and the six workflows that carry the process &mdash; built from the design approved on 17 September and running in a live org.</p>
-    <div class="herometa">
-      <div><b>Org</b>ruby-innovation-7035</div>
-      <div><b>Opportunities</b>10 across all 7 stages</div>
-      <div><b>Automations</b>10 flows &middot; 5 gates &middot; 1 approval</div>
-      <div><b>Reporting</b>13 reports &middot; 2 dashboards &middot; 7 list views</div>
-    </div>
+    <img src="assets/saascend-logo-white.png" alt="SaaScend" class="lg">
+    <h1>Using Salesforce,<br>day to day</h1>
+    <p>Short answers to the things you'll actually do &mdash; working a lead, moving a deal, getting pricing approved, and what to do when Salesforce says no.</p>
   </div>
 </div>
 
 <div class="wrap">
 
-<section id="bowtie">
-  <h2>The journey this org runs</h2>
-  <p class="lede">Corridor's lead-to-revenue process mapped onto the RevOps bowtie &mdash; a funnel narrowing to the deal, then widening into the customer relationship. Every stage below is real configuration, not a diagram.</p>
-  <div class="bowlab"><div>Acquisition</div><div>Retention &amp; growth</div></div>
-  <div class="bow">
-    <div class="bs" style="background:#0E1726"><div class="n">01</div><div class="t">Awareness</div><div class="d">Lead created, source captured</div></div>
-    <div class="bs" style="background:#16243C"><div class="n">02</div><div class="t">Education</div><div class="d">Warming to meeting held</div></div>
-    <div class="bs" style="background:#1D3152"><div class="n">03</div><div class="t">Selection</div><div class="d">Convert &rarr; Discovery</div></div>
-    <div class="bs" style="background:#0079A8"><div class="n">04</div><div class="t">Commit</div><div class="d">Tech validation &rarr; Closed Won</div></div>
-    <div class="bs" style="background:#1D5C7E"><div class="n">05</div><div class="t">Onboard</div><div class="d">Renewal seeded automatically</div></div>
-    <div class="bs" style="background:#2A7B9E"><div class="n">06</div><div class="t">Impact</div><div class="d">Activity recency, reporting</div></div>
-    <div class="bs" style="background:#3E9CBF"><div class="n">07</div><div class="t">Grow</div><div class="d">Expansion, co-term, renewal</div></div>
-  </div>
-  <p class="note"><b>Where the knot sits.</b> Stage 04 is the pivot &mdash; everything left of it is about deciding whether a deal is real, everything right of it is about keeping and growing it. Corridor's two qualification gates sit just before the knot, which is why pipeline downstream of them can be trusted.</p>
-</section>
+<nav class="toc">
+  <h2>What do you need to do?</h2>
+  <ol>
+    <li><a href="#new">I've got a new lead</a></li>
+    <li><a href="#met">I've had the meeting</a></li>
+    <li><a href="#move">I'm moving a deal forward</a></li>
+    <li><a href="#blocked">Salesforce won't let me move my deal</a></li>
+    <li><a href="#poc">I'm running a POC</a></li>
+    <li><a href="#approval">I need pricing approved</a></li>
+    <li><a href="#won">I've won the deal</a></li>
+    <li><a href="#lost">I've lost the deal</a></li>
+    <li><a href="#expand">I want to sell more to a customer</a></li>
+    <li><a href="#morning">What should I check each morning?</a></li>
+    <li><a href="#fields">What is this field for?</a></li>
+    <li><a href="#changed">What changed from Monica</a></li>
+  </ol>
+</nav>
 
-<section id="pillars">
-  <h2>Six capabilities, and where each one lives</h2>
-  <p class="lede">The SaaScend default pillar set, adapted to what Phase 1 actually delivers. ICP scoring and multi-touch attribution are Phase 2, so they are replaced here by the two capabilities Corridor did build &mdash; nothing in this guide describes something the org cannot do today.</p>
-  <div class="grid3">
-    <div class="card">
-      <div class="num">01</div><h3>Lead-to-Revenue Lifecycle</h3>
-      <p>One governed path from Lead through Contact, Account and Opportunity. Meetings live on the Lead; only a qualified lead becomes pipeline.</p>
-      <div class="chips"><span class="chip">Awareness</span><span class="chip">Education</span><span class="chip">Selection</span></div>
-    </div>
-    <div class="card">
-      <div class="num">02</div><h3>Two-Gate Qualification</h3>
-      <p>Business fit and technical fit assessed separately, owned by different people, both required to advance. BANT scored, threshold 75%.</p>
-      <div class="chips"><span class="chip">Selection</span><span class="chip">Commit</span></div>
-    </div>
-    <div class="card">
-      <div class="num">03</div><h3>Activity Intelligence</h3>
-      <p>Email and meetings reach the record without re-entry. Sales and marketing recency tracked separately, rolled to contact and account.</p>
-      <div class="chips"><span class="chip">Education</span><span class="chip">Impact</span></div>
-    </div>
-    <div class="card">
-      <div class="num">04</div><h3>Forecasting &amp; Analytics</h3>
-      <p>Stage-driven forecast categories, 13 reports and 2 dashboards. Leadership queries the business rather than assembling it.</p>
-      <div class="chips"><span class="chip">Commit</span><span class="chip">Impact</span></div>
-    </div>
-    <div class="card">
-      <div class="num">05</div><h3>Pipeline Hygiene &amp; Velocity</h3>
-      <p>Stage entry stamped automatically, next-step age surfaced, stale deals flagged. Renewals created on the win, not remembered later.</p>
-      <div class="chips"><span class="chip">Selection</span><span class="chip">Commit</span><span class="chip">Grow</span></div>
-    </div>
-    <div class="card">
-      <div class="num">06</div><h3>Deal Governance &amp; Approvals</h3>
-      <p>Five validation gates plus a CEO pricing approval that unlocks the move into procurement without making it.</p>
-      <div class="chips"><span class="chip">Commit</span></div>
-    </div>
+<!-- 1 -->
+<section class="task" id="new">
+  <h2>I've got a new lead</h2>
+  <p class="who">Account Executive</p>
+  <p>Leads are where everything starts. A lead is someone you think might be worth a conversation &mdash; it is not pipeline yet, and it should not be.</p>
+  <ol class="steps">
+    <li>Open <b>Leads</b> and pick the <b>Working Leads</b> list, or create a new one.</li>
+    <li>Fill in <b>How Did You Hear About Us</b>. It is one click and it follows the deal all the way to close.</li>
+    <li>Move the status to <b>Warming</b> when you start working it, then <b>Connected</b> once they reply.</li>
+    <li>When a meeting goes in the diary, set the status to <b>Meeting Set</b>.</li>
+  </ol>
+  <div class="auto">
+    <h3>Salesforce does this for you</h3>
+    <ul>
+      <li>Stamps the date you set the meeting, and the date you held it &mdash; you never type either.</li>
+      <li>Logs your calls, emails and meetings against the lead automatically.</li>
+    </ul>
+  </div>
+  <div class="try">
+    <span class="lbl">Try it</span>
+    <a class="btn" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Lead/list?filterName=Working_Leads" target="_blank" rel="noopener">Open Working Leads</a>
+    <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Lead/list?filterName=Meetings_To_Run" target="_blank" rel="noopener">Meetings To Run</a>
   </div>
 </section>
+<hr class="rule">
 
-<section id="stages">
-  <h2>Stage by stage</h2>
-  <p class="lede">What a person does, what the system does in response, and the exact record to open when demonstrating it. Filter by who you are talking to.</p>
-
-  <div class="lens" role="group" aria-label="Role lens">
-    <span>Role lens</span>
-    <button type="button" id="lensAll" aria-pressed="true" data-role="all">Everything</button>
-    <button type="button" id="lensAE" aria-pressed="false" data-role="ae">Account Executive</button>
-    <button type="button" id="lensSE" aria-pressed="false" data-role="se">Sales Engineer</button>
-    <button type="button" id="lensLead" aria-pressed="false" data-role="lead">Leadership</button>
+<!-- 2 -->
+<section class="task" id="met">
+  <h2>I've had the meeting</h2>
+  <p class="who">Account Executive</p>
+  <p>This is the decision point. Either it is worth pursuing, or it is not &mdash; and both answers are useful.</p>
+  <ol class="steps">
+    <li>Set the lead status to <b>Meeting Held</b>.</li>
+    <li>If it is worth pursuing, click <b>Convert</b>. That creates the account, the contact and the opportunity in one go.</li>
+    <li>If it is not, set the status to <b>Disqualified</b> and pick a <b>Disqualification Reason</b>.</li>
+  </ol>
+  <div class="heads">
+    <h3>Don't skip the reason</h3>
+    <p>The lead is never deleted. Next time that company comes round &mdash; and they will &mdash; whoever picks it up can see you already spoke to them and why it didn't go anywhere. That is worth ten seconds now.</p>
   </div>
-
-  <div class="stage" data-roles="ae">
-    <div class="sh"><div class="idx">01</div><div class="ttl"><h3>Awareness &mdash; the lead arrives</h3><div class="sub">Lead object &middot; statuses New and Warming</div></div><div class="chips"><span class="chip acc">Pillar 01</span></div></div>
-    <div class="sb">
-      <div class="blk"><h4>You do</h4><ul class="t">
-        <li>Create the lead, or work one already assigned</li>
-        <li>Record how they found Corridor</li>
-        <li>Move to Warming once you begin working it</li>
-      </ul></div>
-      <div class="blk sys"><h4>What the system does</h4><ul class="t sys">
-        <li>Holds source attribution ready to carry to the opportunity on conversion</li>
-        <li>Starts tracking sales and marketing activity separately from the first touch</li>
-      </ul></div>
-      <div class="cp"><h4>Click path</h4><ol>
-        <li>App Launcher &rarr; <code>Leads</code></li>
-        <li>List view <code>Working Leads</code></li>
-        <li>Open <b>Tessellate Corp</b> &mdash; status <code>New</code></li>
-      </ol>
-      <a class="rec" href="https://ruby-innovation-7035.scratch.my.salesforce.com/lightning/r/Lead/00QQL00000e6wWw2AI/view" target="_blank" rel="noopener">Open Tessellate Corp &rarr;</a></div>
-    </div>
-  </div>
-
-  <div class="stage" data-roles="ae">
-    <div class="sh"><div class="idx">02</div><div class="ttl"><h3>Education &mdash; connect, book, meet</h3><div class="sub">Lead statuses Connected, Meeting Set, Meeting Held</div></div><div class="chips"><span class="chip acc">Pillar 01</span><span class="chip acc">Pillar 03</span></div></div>
-    <div class="sb">
-      <div class="blk"><h4>You do</h4><ul class="t">
-        <li>Move the lead to <b>Meeting Set</b> when it is on the calendar</li>
-        <li>Move to <b>Meeting Held</b> after the conversation</li>
-      </ul></div>
-      <div class="blk sys"><h4>What the system does</h4><ul class="t sys">
-        <li>Stamps <span class="mono">Meeting_Set_Date__c</span> and <span class="mono">Meeting_Held_Date__c</span> &mdash; once each, never overwritten</li>
-        <li>Rolls every logged call, email and meeting into the recency fields</li>
-      </ul></div>
-      <div class="blk watch"><h4>Watch out</h4><ul class="t watch">
-        <li>Meetings are <b>activities</b>, not a pipeline stage. A booked meeting is not an opportunity until someone has qualified it</li>
-      </ul></div>
-      <div class="cp"><h4>Click path</h4><ol>
-        <li>Leads &rarr; list view <code>Meetings To Run</code></li>
-        <li>Open <b>Cadence Robotics</b> &mdash; note the stamped meeting date</li>
-        <li>Then open <b>Arbor Fintech</b>, sitting at <code>Meeting Held</code> &mdash; the convert-or-disqualify decision point</li>
-      </ol>
-      <a class="rec" href="https://ruby-innovation-7035.scratch.my.salesforce.com/lightning/r/Lead/00QQL00000e6wX02AI/view" target="_blank" rel="noopener">Open Arbor Fintech &rarr;</a></div>
-    </div>
-  </div>
-
-  <div class="stage" data-roles="ae lead">
-    <div class="sh"><div class="idx">03</div><div class="ttl"><h3>Selection &mdash; convert or disqualify</h3><div class="sub">Lead conversion &rarr; Opportunity opens in Discovery</div></div><div class="chips"><span class="chip acc">Pillar 01</span><span class="chip acc">Pillar 02</span></div></div>
-    <div class="sb">
-      <div class="blk"><h4>You do</h4><ul class="t">
-        <li>Convert a qualified lead &mdash; creates Account, Contact and Opportunity in one action</li>
-        <li>Or disqualify with a reason, which stays on the lead permanently</li>
-        <li>In Discovery: document the pain point and set Business Qualification</li>
-      </ul></div>
-      <div class="blk sys"><h4>What the system does</h4><ul class="t sys">
-        <li>Carries source attribution onto the new opportunity</li>
-        <li>Opens the opportunity at <b>Discovery</b>, 15%, and stamps the stage entry date</li>
-        <li>Blocks the exit from Discovery until Business Qualification is Qualified and the pain point is filled</li>
-      </ul></div>
-      <div class="blk watch"><h4>Watch out</h4><ul class="t watch">
-        <li>Closed Lost is always available from Discovery &mdash; the gate only applies to moving forward</li>
-      </ul></div>
-      <div class="cp"><h4>Click path &mdash; show the disqualification trail</h4><ol>
-        <li>Leads &rarr; open <b>Pallas Media</b></li>
-        <li>Disqualification Reason reads <code>Not Using Coding Agents</code></li>
-        <li>Point out the lead is never deleted &mdash; next time they appear, the history is there</li>
-      </ol>
-      <a class="rec" href="https://ruby-innovation-7035.scratch.my.salesforce.com/lightning/r/Lead/00QQL00000e6wX12AI/view" target="_blank" rel="noopener">Open Pallas Media &rarr;</a></div>
-    </div>
-  </div>
-
-  <div class="stage" data-roles="ae se">
-    <div class="sh"><div class="idx">04</div><div class="ttl"><h3>Commit &mdash; the two gates and the knot</h3><div class="sub">Technical Validation &rarr; Proof of Concept &rarr; Negotiations &rarr; Security Review</div></div><div class="chips"><span class="chip acc">Pillar 02</span><span class="chip acc">Pillar 05</span><span class="chip acc">Pillar 06</span></div></div>
-    <div class="sb">
-      <div class="blk"><h4>You do</h4><ul class="t">
-        <li><b>AE:</b> establish business fit, keep Next Step current, negotiate and submit for approval</li>
-        <li><b>SE:</b> establish technical fit &mdash; autonomy level, coding agents, IDEs, incumbent SAST/SCA stack</li>
-        <li>Record the POC scoping link, summary and explicit success criteria</li>
-      </ul></div>
-      <div class="blk sys"><h4>What the system does</h4><ul class="t sys">
-        <li>Refuses entry to Proof of Concept unless <b>both</b> gates are Qualified, BANT is 75% or more, and amount, close date, champion and pain point are all present</li>
-        <li>Stamps the POC start date on stage entry &mdash; days in stage is the POC clock</li>
-        <li>Refuses entry to Security Review until the CEO has approved the value</li>
-        <li>Notifies the team when a POC starts</li>
-      </ul></div>
-      <div class="blk watch"><h4>Watch out</h4><ul class="t watch">
-        <li>A technical loss does <b>not</b> close the deal &mdash; deals are still won on commercial grounds</li>
-        <li>Only <code>Confirmed</code> counts toward BANT. <code>Estimated</code> and <code>Partial</code> score zero</li>
-      </ul></div>
-      <div class="cp"><h4>Click path &mdash; prove the gate</h4><ol>
-        <li>Open <b>Northwind Labs</b> &mdash; BANT reads <code>50%</code>, Technical Qualification <code>Not Yet Assessed</code></li>
-        <li>Try to move the stage to <code>Proof of Concept</code></li>
-        <li>Salesforce refuses, naming exactly what is missing</li>
-        <li>Then open <b>Aperture Systems</b> &mdash; BANT <code>75%</code>, both gates Qualified &mdash; and move it. It goes through</li>
-      </ol>
-      <a class="rec" href="https://ruby-innovation-7035.scratch.my.salesforce.com/lightning/r/Opportunity/006QL00000hVODOYA4/view" target="_blank" rel="noopener">Open Northwind Labs &rarr;</a>
-      <a class="rec" href="https://ruby-innovation-7035.scratch.my.salesforce.com/lightning/r/Opportunity/006QL00000hVODPYA4/view" target="_blank" rel="noopener">Open Aperture Systems &rarr;</a></div><figure class=""><img src="shots/01_opp_path.png" alt="The <b>Sales Path</b> across the top of every opportunity. Each stage names its key fields and what is required to leave it." loading="lazy"><figcaption>The <b>Sales Path</b> across the top of every opportunity. Each stage names its key fields and what is required to leave it.</figcaption></figure><figure class="shotfull"><img src="shots/02_opp_qualification.png" alt="<b>Aperture Systems</b> in full &mdash; pipeline hygiene, both qualification sections, BANT at 75%, proof of concept, approval and contract. This is the design doc, rendered." loading="lazy"><figcaption><b>Aperture Systems</b> in full &mdash; pipeline hygiene, both qualification sections, BANT at 75%, proof of concept, approval and contract. This is the design doc, rendered.</figcaption></figure>
-    </div>
-  </div>
-
-  <div class="stage" data-roles="ae lead">
-    <div class="sh"><div class="idx">05</div><div class="ttl"><h3>Onboard &mdash; the win, and what it triggers</h3><div class="sub">Closed Won &rarr; renewal created automatically</div></div><div class="chips"><span class="chip acc">Pillar 05</span></div></div>
-    <div class="sb">
-      <div class="blk"><h4>You do</h4><ul class="t">
-        <li>Capture contract start, end, term, payment terms and billing frequency</li>
-        <li>Move the stage to Closed Won and record why you won</li>
-      </ul></div>
-      <div class="blk sys"><h4>What the system does</h4><ul class="t sys">
-        <li>Creates the renewal opportunity from the contract term, dated to the day after this one ends</li>
-        <li>Clones every product line onto it, re-dated to the renewal term</li>
-        <li>Links it back with <span class="mono">Renewal_Of__c</span></li>
-        <li>Fires the win alert and the customer-onboarding request</li>
-      </ul></div>
-      <div class="cp"><h4>Click path &mdash; the renewal that made itself</h4><ol>
-        <li>Open <b>Basalt Security &mdash; Platform</b>, Closed Won at $88,000</li>
-        <li>Open the linked <b>Basalt Security &mdash; Renewal 2027</b></li>
-        <li>Show its product lines &mdash; same products, renewal-term dates, nobody typed them</li>
-      </ol>
-      <a class="rec" href="https://ruby-innovation-7035.scratch.my.salesforce.com/lightning/r/Opportunity/006QL00000hVT3NYAW/view" target="_blank" rel="noopener">Open Basalt Renewal 2027 &rarr;</a></div><figure class=""><img src="shots/04_renewal_created.png" alt="<b>Basalt Security &mdash; Renewal 2027</b>, created by the system the moment the original deal closed won. Nobody typed this record." loading="lazy"><figcaption><b>Basalt Security &mdash; Renewal 2027</b>, created by the system the moment the original deal closed won. Nobody typed this record.</figcaption></figure>
-    </div>
-  </div>
-
-  <div class="stage" data-roles="ae lead">
-    <div class="sh"><div class="idx">06</div><div class="ttl"><h3>Impact &mdash; who has gone quiet</h3><div class="sub">Activity recency on Account, Contact and Lead</div></div><div class="chips"><span class="chip acc">Pillar 03</span><span class="chip acc">Pillar 04</span></div></div>
-    <div class="sb">
-      <div class="blk"><h4>You do</h4><ul class="t">
-        <li>Log calls and meetings as normal &mdash; nothing extra to maintain</li>
-        <li>Open the Cold Accounts list before prospecting</li>
-      </ul></div>
-      <div class="blk sys"><h4>What the system does</h4><ul class="t sys">
-        <li>Rolls each activity onto the contact or lead and up to the account</li>
-        <li>Keeps sales and marketing recency separate, and shows a green, amber or red indicator at the top of the record</li>
-      </ul></div>
-      <div class="cp"><h4>Click path &mdash; why the two are separate</h4><ol>
-        <li>Accounts &rarr; open <b>Drift Mobility</b></li>
-        <li>Last sales activity: <b>95 days</b>. Last marketing activity: <b>5 days</b></li>
-        <li>On one blended field this account looks warm. Split, it is obviously abandoned</li>
-      </ol>
-      <a class="rec" href="https://ruby-innovation-7035.scratch.my.salesforce.com/lightning/r/Account/001QL00002S0ulzYAB/view" target="_blank" rel="noopener">Open Drift Mobility &rarr;</a></div><figure class=""><img src="shots/03_account_recency.png" alt="<b>Drift Mobility</b> &mdash; the Engagement section carries last sales activity, last marketing activity and a day-count for each, all maintained by the rollup flows." loading="lazy"><figcaption><b>Drift Mobility</b> &mdash; the Engagement section carries last sales activity, last marketing activity and a day-count for each, all maintained by the rollup flows.</figcaption></figure>
-    </div>
-  </div>
-
-  <div class="stage" data-roles="ae lead">
-    <div class="sh"><div class="idx">07</div><div class="ttl"><h3>Grow &mdash; expansion and co-terming</h3><div class="sub">Expansion record type &middot; Co-Term with Renewal action</div></div><div class="chips"><span class="chip acc">Pillar 05</span></div></div>
-    <div class="sb">
-      <div class="blk"><h4>You do</h4><ul class="t">
-        <li>Raise an Expansion opportunity on an existing customer</li>
-        <li>Use <b>Co-Term with Renewal</b> to fold it into the open renewal</li>
-      </ul></div>
-      <div class="blk sys"><h4>What the system does</h4><ul class="t sys">
-        <li>Lists every open renewal on that account</li>
-        <li>Mirrors the expansion's products onto the chosen renewal, re-dated to its term</li>
-        <li>Recalculates the renewal total and links the two records</li>
-      </ul></div>
-      <div class="cp"><h4>Click path &mdash; the one to save for last</h4><ol>
-        <li>Open <b>Halcyon AI &mdash; Expansion</b>, 75 seats at $26,250</li>
-        <li>Note the open <b>Halcyon AI &mdash; Renewal 2027</b> at $95,000</li>
-        <li>Click <b>Co-Term with Renewal</b>, pick the renewal, confirm</li>
-        <li>The renewal now totals <b>$121,250</b> with the seats on the renewal's dates</li>
-      </ol>
-      <a class="rec" href="https://ruby-innovation-7035.scratch.my.salesforce.com/lightning/r/Opportunity/006QL00000hVODVYA4/view" target="_blank" rel="noopener">Open Halcyon AI Expansion &rarr;</a></div><figure class=""><img src="shots/06_coterm.png" alt="The <b>Co-Term with Renewal</b> action, listing the open renewals on that account. Pick one and the expansion&rsquo;s products move onto it at the renewal&rsquo;s dates." loading="lazy"><figcaption>The <b>Co-Term with Renewal</b> action, listing the open renewals on that account. Pick one and the expansion&rsquo;s products move onto it at the renewal&rsquo;s dates.</figcaption></figure>
-    </div>
+  <div class="try">
+    <span class="lbl">Example</span>
+    <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Lead/00QQL00000e6wX02AI/view" target="_blank" rel="noopener">Arbor Fintech &mdash; ready to convert</a>
+    <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Lead/00QQL00000e6wX12AI/view" target="_blank" rel="noopener">Pallas Media &mdash; disqualified</a>
   </div>
 </section>
+<hr class="rule">
 
-<section id="workflows">
-  <h2>The six workflows that carry the process</h2>
-  <p class="lede">Everything above rests on these. If a demo only has time for a handful, take the two marked as the ones people react to.</p>
-
-  <div class="wf gold">
-    <p class="lab">Show this one &middot; Pillar 05</p>
-    <h3>Closed Won creates the renewal</h3>
-    <p>Moving to Closed Won generates the renewal opportunity from the contract term, clones every product line onto it re-dated to the renewal period, links the two records, and fires the win and onboarding alerts. Verified live: Basalt Security won at $88,000 produced a 2027 renewal carrying both line items.</p>
-    <div class="chips"><span class="chip ok">Verified end to end</span><span class="chip">Onboard</span><span class="chip">Grow</span></div>
-  </div>
-
-  <div class="wf gold">
-    <p class="lab">Show this one &middot; Pillar 05</p>
-    <h3>Expansion co-terming</h3>
-    <p>A guided action lists open renewals on the account, mirrors the expansion's line items onto the chosen one at the renewal's dates, and lets the total recalculate natively. Co-terming by hand is where expansion revenue is most often mis-dated.</p>
-    <div class="chips"><span class="chip ok">Verified end to end</span><span class="chip">Grow</span></div>
-  </div>
-
-  <div class="wf">
-    <p class="lab">Pillar 02 &amp; 06</p>
-    <h3>Two-gate qualification with a 75% BANT threshold</h3>
-    <p>Business and technical qualification are assessed independently by different people and both must be Qualified. BANT scores only <code>Confirmed</code> answers; three of four is the bar. The business gate is re-checked at POC entry so a deal cannot slip through after leaving Discovery.</p>
-    <div class="chips"><span class="chip ok">Gate tested both ways</span><span class="chip">Selection</span><span class="chip">Commit</span></div>
-  </div>
-
-  <div class="wf">
-    <p class="lab">Pillar 06</p>
-    <h3>CEO pricing approval</h3>
-    <p>The negotiated value routes to the CEO. While it is pending, the move into Security Review is refused. Approval unlocks the move &mdash; it does not make it, because the rep should still decide when the deal is ready.</p>
-    <div class="chips"><span class="chip ok">Submit, block, approve tested</span><span class="chip">Commit</span></div>
-  </div>
-
-  <div class="wf">
-    <p class="lab">Pillar 03</p>
-    <h3>Activity recency, maintained by the system</h3>
-    <p>Every logged call, email and meeting rolls onto the contact or lead and up to the account. Sales and marketing are tracked separately so a marketing send cannot make a dormant account look active.</p>
-    <div class="chips"><span class="chip ok">31 activities seeded</span><span class="chip">Education</span><span class="chip">Impact</span></div>
-  </div>
-
-  <div class="wf">
-    <p class="lab">Pillar 01 &amp; 05</p>
-    <h3>Stage and next-step stamping</h3>
-    <p>Stage entry date is stamped on every change, giving days-in-stage and the POC clock for free. The next-step date is stamped whenever it changes, so a deal untouched for a week flags itself on a list view rather than waiting for someone to notice.</p>
-    <div class="chips"><span class="chip">Selection</span><span class="chip">Commit</span></div>
-  </div>
-</section>
-
-<section id="runsheet">
-  <h2>Demo run sheet</h2>
-  <p class="lede">Twelve minutes, in order, building from the problem to the payoff. Every record named here exists in the org.</p>
-  <div class="run">
-    <div class="r"><div class="b"><b>Open on the problem, not the product</b><span>Dashboards &rarr; <b>Corridor Sales Leadership</b>. Pipeline by stage, deals needing attention, engagement recency, all on one screen.</span><span class="say">"Today this picture takes an afternoon to assemble. Here it is a page you open."</span><figure class=""><img src="shots/05_dashboard.png" alt="<b>Corridor Sales Leadership</b> running on the seeded data &mdash; six components, including qualification coverage and accounts by activity recency." loading="lazy"><figcaption><b>Corridor Sales Leadership</b> running on the seeded data &mdash; six components, including qualification coverage and accounts by activity recency.</figcaption></figure></div></div>
-    <div class="r"><div class="b"><b>Show that pipeline means pipeline</b><span>Leads &rarr; <b>Working Leads</b>. Point out meetings live here, not in the forecast.</span><span class="say">"A booked meeting is not pipeline until someone has qualified it. That is the whole reason these numbers can be trusted."</span></div></div>
-    <div class="r"><div class="b"><b>Open the disqualification trail</b><span>Lead <b>Pallas Media</b> &mdash; reason recorded, lead retained, recyclable.</span></div></div>
-    <div class="r"><div class="b"><b>Walk an opportunity through the path</b><span>Open <b>Aperture Systems</b>. Use the Sales Path across the top &mdash; each stage names its key fields and what is required to leave it.</span></div></div>
-    <div class="r"><div class="b"><b>Hit the gate on purpose</b><span>Open <b>Northwind Labs</b>, BANT 50%, and try to move it to Proof of Concept. Let it fail.</span><span class="say">"It will not let me. That is the point &mdash; the forecast is a property of the data, not of my optimism."</span></div></div>
-    <div class="r"><div class="b"><b>Then pass it</b><span>Back to <b>Aperture Systems</b> at 75% with both gates Qualified. Move it. It goes through and the POC clock starts.</span></div></div>
-    <div class="r"><div class="b"><b>Show a POC in flight</b><span><b>Volt Robotics</b> &mdash; scoping link, explicit success criteria, days elapsed against target end date.</span></div></div>
-    <div class="r"><div class="b"><b>Route an approval</b><span><b>Meridian HealthTech</b> at $120,000. Submit for approval, try to move to Security Review, watch it refuse.</span><span class="say">"Approval unlocks the move. It does not make it &mdash; the rep still decides when the deal is ready."</span></div></div>
-    <div class="r"><div class="b"><b>Win a deal and let it work</b><span>Open <b>Basalt Security &mdash; Renewal 2027</b>, created by the system when the original closed. Open its product lines.</span><span class="say">"Nobody created this. Nobody typed those line items or those dates."</span></div></div>
-    <div class="r"><div class="b"><b>Co-term an expansion</b><span><b>Halcyon AI &mdash; Expansion</b> &rarr; <b>Co-Term with Renewal</b> &rarr; pick the 2027 renewal. It becomes $121,250.</span></div></div>
-    <div class="r"><div class="b"><b>Answer the prospecting question</b><span>Account <b>Drift Mobility</b> &mdash; 95 days since sales, 5 days since marketing.</span><span class="say">"On a single last-activity field this looks like a warm account. It is not."</span></div></div>
-    <div class="r"><div class="b"><b>Close where you opened</b><span>Back to the dashboard. Everything just done is already reflected.</span></div></div>
-  </div>
-</section>
-
-<section id="reference">
-  <h2>Reference</h2>
-  <p class="lede">The example records, list views and gates, for anyone driving the org without this guide open.</p>
-
-  <h3 style="margin-top:22px">Example records</h3>
+<!-- 3 -->
+<section class="task" id="move">
+  <h2>I'm moving a deal forward</h2>
+  <p class="who">Account Executive &amp; Sales Engineer</p>
+  <p>The bar across the top of every opportunity is your map. Click a stage and it tells you what that stage needs.</p>
+  <figure>
+    <img src="shots/path.png" alt="The sales path across the top of an opportunity, showing all seven stages" loading="lazy">
+    <figcaption>Click any stage to see its key fields and what's required to leave it. <b>Mark Stage as Complete</b> moves the deal on.</figcaption>
+  </figure>
+  <p>Here is what each stage needs before you can leave it. Nothing else is enforced &mdash; fill in the rest as you learn it.</p>
   <div class="tw"><table>
-    <tr><th>Record</th><th>Stage / status</th><th>What it demonstrates</th></tr>
-    <tr><td class="k">Northwind Labs &mdash; Platform</td><td>Discovery &middot; BANT 50%</td><td>The gate refusing a premature move</td></tr>
-    <tr><td class="k">Aperture Systems &mdash; Platform</td><td>Technical Validation &middot; BANT 75%</td><td>The gate passing at exactly the threshold</td></tr>
-    <tr><td class="k">Volt Robotics &mdash; Platform</td><td>Proof of Concept &middot; BANT 100%</td><td>POC fields, success criteria, elapsed clock</td></tr>
-    <tr><td class="k">Meridian HealthTech &mdash; Platform</td><td>Negotiations &middot; $120,000</td><td>Pricing approval routing to the CEO</td></tr>
-    <tr><td class="k">Basalt Security &mdash; Platform</td><td>Closed Won &middot; $88,000</td><td>Renewal auto-creation with cloned lines</td></tr>
-    <tr><td class="k">Halcyon AI &mdash; Expansion</td><td>Discovery &middot; $26,250</td><td>Co-terming into an open renewal</td></tr>
-    <tr><td class="k">Drift Mobility &mdash; Platform</td><td>Closed Lost</td><td>Technical loss, loss reason, cold account</td></tr>
-    <tr><td class="k">Pallas Media</td><td>Lead &middot; Disqualified</td><td>Disqualification reason retained on the lead</td></tr>
-    <tr><td class="k">Cadence Robotics</td><td>Lead &middot; Meeting Set</td><td>Meeting date stamped automatically</td></tr>
+    <tr><th>Stage</th><th>Before you can move on</th></tr>
+    <tr><td class="k">Discovery</td><td>Business Qualification set to <b>Qualified</b>, and the <b>Pain Point</b> written down</td></tr>
+    <tr><td class="k">Technical Validation</td><td>Technical Qualification <b>Qualified</b>, BANT <b>75%+</b>, plus Amount, Close Date and Champion</td></tr>
+    <tr><td class="k">Proof of Concept</td><td>Record the <b>Tech Win</b> result &mdash; yes or no, with a reason</td></tr>
+    <tr><td class="k">Negotiations</td><td>Pricing <b>approved</b> (see below)</td></tr>
+    <tr><td class="k">Security Review / Procurement</td><td>Nothing enforced &mdash; move it when the contract is signed</td></tr>
+    <tr><td class="k">Closed Lost</td><td>A <b>Win / Loss Reason</b></td></tr>
   </table></div>
+  <figure>
+    <img src="shots/bant.png" alt="The BANT section showing budget, authority, need and timeline with a 75 percent score" loading="lazy">
+    <figcaption>BANT only counts answers marked <b>Confirmed</b>. <code>Estimated</code> and <code>Partial</code> score zero &mdash; three out of four gets you to 75%.</figcaption>
+  </figure>
+  <div class="auto">
+    <h3>Salesforce does this for you</h3>
+    <ul>
+      <li>Works out the BANT score &mdash; you just answer the four questions.</li>
+      <li>Records the date the stage changed, so days-in-stage is always right.</li>
+      <li>Fills in qualification answers from your Gong calls where it can. You can always overwrite them.</li>
+    </ul>
+  </div>
+  <div class="try">
+    <span class="lbl">Try it</span>
+    <a class="btn" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Opportunity/006QL00000hVODPYA4/view" target="_blank" rel="noopener">Aperture Systems &mdash; ready to advance</a>
+  </div>
+</section>
+<hr class="rule">
 
-  <h3 style="margin-top:26px">List views worth opening</h3>
+<!-- 4 -->
+<section class="task" id="blocked">
+  <h2>Salesforce won't let me move my deal</h2>
+  <p class="who">Everyone &mdash; read this one</p>
+  <p>This is deliberate, and the message always tells you exactly what is missing. Here is what it looks like:</p>
+  <figure>
+    <img src="shots/gate_error.png" alt="Salesforce showing an error when a deal is moved to Proof of Concept without meeting the requirements" loading="lazy">
+    <figcaption>The error names every missing item at once, so you can fix them in one pass rather than one at a time.</figcaption>
+  </figure>
   <div class="tw"><table>
-    <tr><th>Object</th><th>List view</th><th>Answers</th></tr>
-    <tr><td class="k">Opportunity</td><td>Deals Needing Attention</td><td>What have I not touched in a week?</td></tr>
-    <tr><td class="k">Opportunity</td><td>POCs Running Now</td><td>Which proofs of concept are live, and how long have they run?</td></tr>
-    <tr><td class="k">Opportunity</td><td>Awaiting Pricing Approval</td><td>What is sitting with the CEO?</td></tr>
-    <tr><td class="k">Opportunity</td><td>Renewals &mdash; Next 90 Days</td><td>What renews soon?</td></tr>
-    <tr><td class="k">Account</td><td>Cold Accounts</td><td>Who has had no sales contact in 60+ days?</td></tr>
-    <tr><td class="k">Lead</td><td>Meetings To Run</td><td>What is booked and not yet held?</td></tr>
-    <tr><td class="k">Lead</td><td>Working Leads</td><td>What is live, excluding converted and disqualified?</td></tr>
+    <tr><th>If it says</th><th>Do this</th></tr>
+    <tr><td class="k">Both qualification gates must be Qualified</td><td>Set <b>Business Qualification</b> yourself. Ask your SE to set <b>Technical Qualification</b> &mdash; it is their call, not yours.</td></tr>
+    <tr><td class="k">BANT must be at least 75%</td><td>You need three of the four marked <b>Confirmed</b>. Check the BANT section &mdash; <code>Estimated</code> doesn't count.</td></tr>
+    <tr><td class="k">Amount must be populated</td><td>Put in your best number. It can change later.</td></tr>
+    <tr><td class="k">Close Date must be populated</td><td>It cannot be in the past.</td></tr>
+    <tr><td class="k">Champion must be populated</td><td>Pick the contact who is arguing for you internally.</td></tr>
+    <tr><td class="k">Pain Point must be populated</td><td>Write what is actually broken for them, in their words. No pain, no deal.</td></tr>
+    <tr><td class="k">Pricing approval is required</td><td>Submit for approval and wait for the decision &mdash; see below.</td></tr>
+    <tr><td class="k">Record a Win / Loss Reason</td><td>You're closing it lost and haven't said why.</td></tr>
   </table></div>
+  <div class="heads">
+    <h3>You can always close a deal lost</h3>
+    <p>None of these gates stop you disqualifying or closing something out. They only apply to moving a deal <i>forward</i>. If a deal is dead, close it &mdash; that keeps the forecast honest.</p>
+  </div>
+</section>
+<hr class="rule">
 
-  <h3 style="margin-top:26px">The five gates</h3>
+<!-- 5 -->
+<section class="task" id="poc">
+  <h2>I'm running a POC</h2>
+  <p class="who">Account Executive &amp; Sales Engineer</p>
+  <p>Move the deal to <b>Proof of Concept</b> on the day the customer actually gets access &mdash; that starts the clock.</p>
+  <ol class="steps">
+    <li>Paste the link to your <b>scoping doc</b>. The full checklist stays in the doc, not in Salesforce.</li>
+    <li>Write a short <b>summary</b> so nobody has to open the doc to understand the deal.</li>
+    <li>Write the <b>success criteria</b> explicitly &mdash; what has to be true for this to count as a win.</li>
+    <li>Set a <b>target end date</b>.</li>
+    <li>When it finishes, set <b>Tech Win</b> to Yes or No, pick a reason, and add a note.</li>
+  </ol>
+  <figure>
+    <img src="shots/techqual.png" alt="The technical qualification section showing autonomy level, coding agents, IDEs and current tooling" loading="lazy">
+    <figcaption>The technical picture your SE builds &mdash; what they run today, and how autonomous their development is.</figcaption>
+  </figure>
+  <div class="heads">
+    <h3>A technical loss doesn't kill the deal</h3>
+    <p>Setting Tech Win to No does not close anything. Deals are still won on commercial grounds. It flags the opportunity so someone can decide what to do &mdash; that decision stays yours.</p>
+  </div>
+  <div class="try">
+    <span class="lbl">Example</span>
+    <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Opportunity/006QL00000hVODQYA4/view" target="_blank" rel="noopener">Volt Robotics &mdash; POC in flight</a>
+    <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Opportunity/list?filterName=POCs_Running_Now" target="_blank" rel="noopener">All POCs running now</a>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- 6 -->
+<section class="task" id="approval">
+  <h2>I need pricing approved</h2>
+  <p class="who">Account Executive</p>
+  <p>Once you've agreed a number, it goes to the CEO before the deal can move into Security Review.</p>
+  <ol class="steps">
+    <li>Make sure the <b>Amount</b> on the opportunity is the number you actually agreed.</li>
+    <li>Click <b>Submit for Approval</b>.</li>
+    <li>You'll see the status change to <b>Pending Approval</b>, and the approver gets notified.</li>
+    <li>Once approved, <b>you</b> move the deal to Security Review. Approval unlocks the move; it doesn't make it.</li>
+  </ol>
+  <div class="auto">
+    <h3>Salesforce does this for you</h3>
+    <ul>
+      <li>Records who approved it, when, and at what number.</li>
+      <li>Keeps the full approval history on the record, so nobody has to dig through Slack.</li>
+      <li>Lets you keep editing the deal while you wait &mdash; you are not locked out.</li>
+    </ul>
+  </div>
+  <div class="try">
+    <span class="lbl">Try it</span>
+    <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Opportunity/list?filterName=Awaiting_Pricing_Approval" target="_blank" rel="noopener">What's waiting for approval</a>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- 7 -->
+<section class="task" id="won">
+  <h2>I've won the deal</h2>
+  <p class="who">Account Executive</p>
+  <ol class="steps">
+    <li>Fill in the <b>Contract Details</b> &mdash; start date, end date, term, payment terms, billing frequency.</li>
+    <li>Set the stage to <b>Closed Won</b>.</li>
+    <li>Add a <b>Win Reason</b> and a note on why you won, while it's fresh.</li>
+  </ol>
+  <div class="auto">
+    <h3>Then Salesforce does the rest</h3>
+    <ul>
+      <li>Creates next year's <b>renewal opportunity</b>, dated from the end of this contract.</li>
+      <li>Copies every product line onto it with the right dates. You don't rebuild the deal.</li>
+      <li>Posts the win to the team.</li>
+      <li>Tells the office manager to send the customer their swag, with the address.</li>
+    </ul>
+  </div>
+  <div class="heads">
+    <h3>Contract dates matter more than you'd think</h3>
+    <p>The renewal is built from them. If the end date is wrong, next year's renewal lands on the wrong date and nobody notices until it's late.</p>
+  </div>
+  <div class="try">
+    <span class="lbl">Example</span>
+    <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Opportunity/006QL00000hVT3NYAW/view" target="_blank" rel="noopener">A renewal Salesforce created by itself</a>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- 8 -->
+<section class="task" id="lost">
+  <h2>I've lost the deal</h2>
+  <p class="who">Account Executive</p>
+  <ol class="steps">
+    <li>Set the stage to <b>Closed Lost</b>.</li>
+    <li>Pick a <b>Win / Loss Reason</b> &mdash; this one is required.</li>
+    <li>Add a note with anything worth knowing if we go back in.</li>
+  </ol>
+  <div class="heads">
+    <h3>Why the reason is compulsory</h3>
+    <p>It is the only thing a win/loss review has to work with. "Competitor Won" with a note saying who and why is worth more than a tidy pipeline.</p>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- 9 -->
+<section class="task" id="expand">
+  <h2>I want to sell more to a customer</h2>
+  <p class="who">Account Executive</p>
+  <ol class="steps">
+    <li>Create an opportunity on the account and set the record type to <b>Expansion</b>.</li>
+    <li>Add the products they're buying.</li>
+    <li>If they already have a renewal coming up, click <b>Co-Term with Renewal</b>.</li>
+    <li>Pick the renewal. Done.</li>
+  </ol>
+  <figure>
+    <img src="shots/coterm.png" alt="The Co-Term with Renewal action listing the open renewals on the account" loading="lazy">
+    <figcaption>It lists the open renewals on that account. Pick one and the expansion's products move onto it, re-dated to the renewal's term, with the total updated.</figcaption>
+  </figure>
+  <div class="heads">
+    <h3>Do this rather than co-terming by hand</h3>
+    <p>Lining up dates manually is where expansion revenue usually gets mis-dated &mdash; and it's the customer who notices, on their invoice.</p>
+  </div>
+  <div class="try">
+    <span class="lbl">Try it</span>
+    <a class="btn" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Opportunity/006QL00000hVODVYA4/view" target="_blank" rel="noopener">Halcyon AI &mdash; expansion ready to co-term</a>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- 10 -->
+<section class="task" id="morning">
+  <h2>What should I check each morning?</h2>
+  <p class="who">Everyone</p>
+  <p>Four lists. None of them take longer than a minute.</p>
+  <figure>
+    <img src="shots/listview.png" alt="The Deals Needing Attention list view" loading="lazy">
+    <figcaption><b>Deals Needing Attention</b> &mdash; anything you haven't updated the next step on in over a week appears here by itself.</figcaption>
+  </figure>
   <div class="tw"><table>
-    <tr><th>Transition</th><th>Refused unless</th></tr>
-    <tr><td class="k">Leaving Discovery</td><td>Business Qualification is Qualified and the pain point is documented</td></tr>
-    <tr><td class="k">Entering Proof of Concept</td><td>Both gates Qualified, BANT 75%+, amount, future close date, champion, pain point</td></tr>
-    <tr><td class="k">Entering Security Review</td><td>Pricing approval granted</td></tr>
-    <tr><td class="k">Closing Lost</td><td>A win/loss reason is recorded</td></tr>
-    <tr><td class="k">Any open opportunity</td><td>Close date is not in the past</td></tr>
+    <tr><th>Open this</th><th>To answer</th></tr>
+    <tr><td class="k"><a href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Opportunity/list?filterName=Deals_Needing_Attention" target="_blank" rel="noopener">Deals Needing Attention</a></td><td>What have I let go quiet?</td></tr>
+    <tr><td class="k"><a href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Opportunity/list?filterName=POCs_Running_Now" target="_blank" rel="noopener">POCs Running Now</a></td><td>Which POCs are live, and how long have they been going?</td></tr>
+    <tr><td class="k"><a href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Account/list?filterName=Cold_Accounts" target="_blank" rel="noopener">Cold Accounts</a></td><td>Who hasn't heard from us in 60 days?</td></tr>
+    <tr><td class="k"><a href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Opportunity/list?filterName=Renewals_Next_90_Days" target="_blank" rel="noopener">Renewals &mdash; Next 90 Days</a></td><td>What's coming up for renewal?</td></tr>
   </table></div>
+  <p>Before you prospect into an account, check the <b>Engagement</b> section on it:</p>
+  <figure>
+    <img src="shots/engagement.png" alt="The engagement section on an account showing 95 days since sales activity and 5 days since marketing activity" loading="lazy">
+    <figcaption>Sales and marketing activity are tracked separately on purpose. This account looks active &mdash; but nobody in sales has spoken to them for 95 days.</figcaption>
+  </figure>
+  <div class="try">
+    <span class="lbl">Leadership</span>
+    <a class="btn" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Dashboard/01ZQL00000ALBNi2AP/view" target="_blank" rel="noopener">Sales Leadership dashboard</a>
+    <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Report/home" target="_blank" rel="noopener">All reports</a>
+  </div>
+</section>
+<hr class="rule">
 
-  <p class="note"><b>Two things this org cannot show, by design.</b> Slack alerts appear as in-app notifications here because a scratch org has no Slack workspace &mdash; the flows, triggers and message content are final and swapping the action is a one-line change in Corridor's sandbox. And product pricing is placeholder, pending the deal-desk sheet; every product description says so on the record.</p>
+<!-- 11 -->
+<section class="task" id="fields">
+  <h2>What is this field for?</h2>
+  <p class="who">Reference</p>
+  <p>The ones people ask about. Anything not listed is either obvious or filled in for you.</p>
+  <div class="tw"><table>
+    <tr><th>Field</th><th>What it's for</th><th>Who fills it</th></tr>
+    <tr><td class="k">Pain Point</td><td>What is actually broken for them, in their words</td><td>You</td></tr>
+    <tr><td class="k">Business Qualification</td><td>Is there a real project, budget and interest?</td><td>AE</td></tr>
+    <tr><td class="k">Technical Qualification</td><td>Are they a technical fit?</td><td>SE</td></tr>
+    <tr><td class="k">Autonomy Level</td><td>How autonomous their development flow is today</td><td>SE</td></tr>
+    <tr><td class="k">Current SAST / SCA Stack</td><td>What security tooling they already run</td><td>SE</td></tr>
+    <tr><td class="k">BANT &mdash; the four</td><td>Only <b>Confirmed</b> counts toward the score</td><td>AE, or Gong</td></tr>
+    <tr><td class="k">BANT Score</td><td>Worked out for you. 75% is the bar for a POC</td><td>Automatic</td></tr>
+    <tr><td class="k">Champion</td><td>Who is arguing for you when you're not in the room</td><td>AE</td></tr>
+    <tr><td class="k">Next Step</td><td>The single next thing that has to happen</td><td>AE</td></tr>
+    <tr><td class="k">Days in Current Stage</td><td>How long it's sat there</td><td>Automatic</td></tr>
+    <tr><td class="k">POC Success Criteria</td><td>What has to be true for the POC to count as a win</td><td>AE / SE</td></tr>
+    <tr><td class="k">Tech Win</td><td>Did the POC succeed technically?</td><td>SE</td></tr>
+    <tr><td class="k">Contract dates</td><td>Build next year's renewal &mdash; get them right</td><td>AE</td></tr>
+    <tr><td class="k">Win / Loss Reason</td><td>Why it went the way it did</td><td>AE</td></tr>
+    <tr><td class="k">Last Sales Activity</td><td>When someone in sales last spoke to them</td><td>Automatic</td></tr>
+  </table></div>
+</section>
+<hr class="rule">
+
+<!-- 12 -->
+<section class="task" id="changed">
+  <h2>What changed from Monica</h2>
+  <p class="who">Worth knowing</p>
+  <div class="tw"><table>
+    <tr><th>In Monica</th><th>Now</th></tr>
+    <tr><td class="k">A booked meeting was an opportunity</td><td>Meetings live on the <b>lead</b>. An opportunity is created once you've spoken to them and it's real &mdash; so pipeline actually means pipeline.</td></tr>
+    <tr><td class="k">You could move a deal whenever</td><td>Stages have requirements. The message always tells you what's missing.</td></tr>
+    <tr><td class="k">Renewals were remembered, or weren't</td><td>Winning a deal creates the renewal automatically.</td></tr>
+    <tr><td class="k">Activity lived in your inbox</td><td>Email and meetings land on the record on their own.</td></tr>
+    <tr><td class="k">Pricing approvals happened in Slack</td><td>They happen on the record, with a history.</td></tr>
+  </table></div>
+  <div class="heads">
+    <h3>Two things to know about this demo org</h3>
+    <p>Team notifications appear in Salesforce rather than Slack &mdash; Slack gets connected in your own environment. And product prices here are placeholders until the pricing sheet is finalised.</p>
+  </div>
 </section>
 
-<div class="foot wrap" style="padding-left:0;padding-right:0">
-  <img src="assets/saascend-logo-white.png" alt="SaaScend" style="height:20px;width:auto;display:block;margin-bottom:12px;filter:invert(1) hue-rotate(180deg) saturate(1.4)" class="logo-foot">Built by <b style="color:var(--tx)">SaaScend</b> for Corridor &middot; Salesforce GTM Foundation, Phase 1 &middot; Generated 17 September 2026 from design v1.3 &middot; tej@saascend.com
+<div class="foot">
+  <img src="assets/saascend-logo-white.png" alt="SaaScend" class="lg">
+  Built by <b>SaaScend</b> for Corridor &middot; Salesforce GTM Foundation, Phase 1<br>
+  Something here not match what you see? Email <a href="mailto:tej@saascend.com" style="color:var(--accd)">tej@saascend.com</a> and it'll get fixed.
 </div>
 
 </div>
-
-<script>
-(function(){
-  var btns = Array.prototype.slice.call(document.querySelectorAll('.lens button'));
-  var stages = Array.prototype.slice.call(document.querySelectorAll('.stage'));
-  function apply(role){
-    btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.role === role)); });
-    stages.forEach(function(s){
-      var roles = (s.dataset.roles || '').split(' ');
-      var show = role === 'all' || roles.indexOf(role) !== -1;
-      s.classList.toggle('dim', !show);
-    });
-    try { localStorage.setItem('corridorGuideLens', role); } catch (e) {}
-  }
-  btns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.dataset.role); }); });
-  var saved = 'all';
-  try { saved = localStorage.getItem('corridorGuideLens') || 'all'; } catch (e) {}
-  apply(saved);
-})();
-</script>
-
 </body>
 </html>
