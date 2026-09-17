@@ -102,6 +102,11 @@ a.btn:hover,a.btn:focus-visible{background:var(--ink2);outline:none}
 a.btn.ghost{background:transparent;color:var(--accd);border:1px solid var(--line2)}
 a.btn.ghost:hover{background:var(--paper2)}
 
+.nav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:0 0 18px;padding:11px 14px;
+  background:var(--paper2);border-radius:6px;font-size:14px;font-family:var(--mono)}
+.nav .c{color:var(--faint)}
+.nav b{font-weight:500;color:var(--tx);font-family:var(--body)}
+.nav .lbl{font-family:var(--body);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-right:3px}
 .tw{overflow-x:auto;margin:18px 0}
 table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
 th{text-align:left;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;padding:0 12px 9px 0;border-bottom:1px solid var(--line2)}
@@ -159,13 +164,13 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <section class="task" id="new">
   <h2>I've got a new lead</h2>
   <p class="who">Account Executive</p>
-  <p>Leads are where everything starts. A lead is someone you think might be worth a conversation &mdash; it is not pipeline yet, and it should not be.</p>
+  <p>Leads are where everything starts. A lead is someone you think might be worth a conversation &mdash; it is not pipeline yet, and it should not be.</p><div class="nav"><span class="lbl">Click path</span><b>App Launcher</b><span class="c">&rsaquo;</span><b>Leads</b><span class="c">&rsaquo;</span><b>Working Leads</b><span class="c">&rsaquo;</span><b>open a lead</b></div>
   <ol class="steps">
     <li>Open <b>Leads</b> and pick the <b>Working Leads</b> list, or create a new one.</li>
     <li>Fill in <b>How Did You Hear About Us</b>. It is one click and it follows the deal all the way to close.</li>
     <li>Move the status to <b>Warming</b> when you start working it, then <b>Connected</b> once they reply.</li>
     <li>When a meeting goes in the diary, set the status to <b>Meeting Set</b>.</li>
-  </ol>
+  </ol><figure><img src="shots/lead_record.png" alt="A lead at Meeting Held. Status runs along the top; the meeting dates underneath were stamped for you." loading="lazy"><figcaption>A lead at <b>Meeting Held</b>. Status runs along the top; the meeting dates underneath were stamped for you.</figcaption></figure>
   <div class="auto">
     <h3>Salesforce does this for you</h3>
     <ul>
@@ -185,12 +190,12 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <section class="task" id="met">
   <h2>I've had the meeting</h2>
   <p class="who">Account Executive</p>
-  <p>This is the decision point. Either it is worth pursuing, or it is not &mdash; and both answers are useful.</p>
+  <p>This is the decision point. Either it is worth pursuing, or it is not &mdash; and both answers are useful.</p><div class="nav"><span class="lbl">Click path</span><b>open the lead</b><span class="c">&rsaquo;</span><b>Convert &mdash; or set status to Disqualified</b></div>
   <ol class="steps">
     <li>Set the lead status to <b>Meeting Held</b>.</li>
     <li>If it is worth pursuing, click <b>Convert</b>. That creates the account, the contact and the opportunity in one go.</li>
     <li>If it is not, set the status to <b>Disqualified</b> and pick a <b>Disqualification Reason</b>.</li>
-  </ol>
+  </ol><figure><img src="shots/disqual_section.png" alt="The Disqualification section. Reason plus a note &mdash; that is the whole job, and it stays on the lead forever." loading="lazy"><figcaption>The Disqualification section. Reason plus a note &mdash; that is the whole job, and it stays on the lead forever.</figcaption></figure>
   <div class="heads">
     <h3>Don't skip the reason</h3>
     <p>The lead is never deleted. Next time that company comes round &mdash; and they will &mdash; whoever picks it up can see you already spoke to them and why it didn't go anywhere. That is worth ten seconds now.</p>
@@ -207,11 +212,11 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <section class="task" id="move">
   <h2>I'm moving a deal forward</h2>
   <p class="who">Account Executive &amp; Sales Engineer</p>
-  <p>The bar across the top of every opportunity is your map. Click a stage and it tells you what that stage needs.</p>
+  <p>The bar across the top of every opportunity is your map. Click a stage and it tells you what that stage needs.</p><div class="nav"><span class="lbl">Click path</span><b>Opportunities</b><span class="c">&rsaquo;</span><b>open the deal</b><span class="c">&rsaquo;</span><b>click a stage on the path</b><span class="c">&rsaquo;</span><b>expand the chevron</b></div>
   <figure>
     <img src="shots/path.png" alt="The sales path across the top of an opportunity, showing all seven stages" loading="lazy">
     <figcaption>Click any stage to see its key fields and what's required to leave it. <b>Mark Stage as Complete</b> moves the deal on.</figcaption>
-  </figure>
+  </figure><figure><img src="shots/path_guidance.png" alt="Hit the chevron on the left and the path opens up: the key fields for that stage on the left, editable in place, and what you need to move on on the right. You rarely need to scroll further than this." loading="lazy"><figcaption>Hit the chevron on the left and the path opens up: the <b>key fields</b> for that stage on the left, editable in place, and <b>what you need to move on</b> on the right. You rarely need to scroll further than this.</figcaption></figure>
   <p>Here is what each stage needs before you can leave it. Nothing else is enforced &mdash; fill in the rest as you learn it.</p>
   <div class="tw"><table>
     <tr><th>Stage</th><th>Before you can move on</th></tr>
@@ -225,7 +230,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
   <figure>
     <img src="shots/bant.png" alt="The BANT section showing budget, authority, need and timeline with a 75 percent score" loading="lazy">
     <figcaption>BANT only counts answers marked <b>Confirmed</b>. <code>Estimated</code> and <code>Partial</code> score zero &mdash; three out of four gets you to 75%.</figcaption>
-  </figure>
+  </figure><figure><img src="shots/techqual.png" alt="The Technical Qualification section, filled in by your SE. You do not need to complete this yourself &mdash; but the deal cannot reach POC until they have." loading="lazy"><figcaption>The Technical Qualification section, filled in by your SE. You do not need to complete this yourself &mdash; but the deal cannot reach POC until they have.</figcaption></figure>
   <div class="auto">
     <h3>Salesforce does this for you</h3>
     <ul>
@@ -245,7 +250,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <section class="task" id="blocked">
   <h2>Salesforce won't let me move my deal</h2>
   <p class="who">Everyone &mdash; read this one</p>
-  <p>This is deliberate, and the message always tells you exactly what is missing. Here is what it looks like:</p>
+  <p>This is deliberate, and the message always tells you exactly what is missing. Here is what it looks like:</p><div class="nav"><span class="lbl">Click path</span><b>change the Stage</b><span class="c">&rsaquo;</span><b>Save</b><span class="c">&rsaquo;</span><b>read the message</b></div>
   <figure>
     <img src="shots/gate_error.png" alt="Salesforce showing an error when a deal is moved to Proof of Concept without meeting the requirements" loading="lazy">
     <figcaption>The error names every missing item at once, so you can fix them in one pass rather than one at a time.</figcaption>
@@ -272,14 +277,14 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <section class="task" id="poc">
   <h2>I'm running a POC</h2>
   <p class="who">Account Executive &amp; Sales Engineer</p>
-  <p>Move the deal to <b>Proof of Concept</b> on the day the customer actually gets access &mdash; that starts the clock.</p>
+  <p>Move the deal to <b>Proof of Concept</b> on the day the customer actually gets access &mdash; that starts the clock.</p><div class="nav"><span class="lbl">Click path</span><b>open the deal</b><span class="c">&rsaquo;</span><b>Details</b><span class="c">&rsaquo;</span><b>Proof of Concept section</b></div>
   <ol class="steps">
     <li>Paste the link to your <b>scoping doc</b>. The full checklist stays in the doc, not in Salesforce.</li>
     <li>Write a short <b>summary</b> so nobody has to open the doc to understand the deal.</li>
     <li>Write the <b>success criteria</b> explicitly &mdash; what has to be true for this to count as a win.</li>
     <li>Set a <b>target end date</b>.</li>
     <li>When it finishes, set <b>Tech Win</b> to Yes or No, pick a reason, and add a note.</li>
-  </ol>
+  </ol><figure><img src="shots/poc_section.png" alt="The POC section on a live deal. POC Days Elapsed counts itself from the day you moved the stage &mdash; there is no start date to remember." loading="lazy"><figcaption>The POC section on a live deal. <b>POC Days Elapsed</b> counts itself from the day you moved the stage &mdash; there is no start date to remember.</figcaption></figure>
   <figure>
     <img src="shots/techqual.png" alt="The technical qualification section showing autonomy level, coding agents, IDEs and current tooling" loading="lazy">
     <figcaption>The technical picture your SE builds &mdash; what they run today, and how autonomous their development is.</figcaption>
@@ -300,13 +305,13 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <section class="task" id="approval">
   <h2>I need pricing approved</h2>
   <p class="who">Account Executive</p>
-  <p>Once you've agreed a number, it goes to the CEO before the deal can move into Security Review.</p>
+  <p>Once you've agreed a number, it goes to the CEO before the deal can move into Security Review.</p><div class="nav"><span class="lbl">Click path</span><b>open the deal</b><span class="c">&rsaquo;</span><b>Submit for Approval</b><span class="c">&rsaquo;</span><b>wait for the decision</b><span class="c">&rsaquo;</span><b>move the stage yourself</b></div>
   <ol class="steps">
     <li>Make sure the <b>Amount</b> on the opportunity is the number you actually agreed.</li>
     <li>Click <b>Submit for Approval</b>.</li>
     <li>You'll see the status change to <b>Pending Approval</b>, and the approver gets notified.</li>
     <li>Once approved, <b>you</b> move the deal to Security Review. Approval unlocks the move; it doesn't make it.</li>
-  </ol>
+  </ol><figure><img src="shots/approval_section.png" alt="After approval: the status, the number approved, who approved it and when &mdash; all on the record, nothing to go looking for." loading="lazy"><figcaption>After approval: the status, the number approved, who approved it and when &mdash; all on the record, nothing to go looking for.</figcaption></figure>
   <div class="auto">
     <h3>Salesforce does this for you</h3>
     <ul>
@@ -326,11 +331,11 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <section class="task" id="won">
   <h2>I've won the deal</h2>
   <p class="who">Account Executive</p>
-  <ol class="steps">
+  <div class="nav"><span class="lbl">Click path</span><b>open the deal</b><span class="c">&rsaquo;</span><b>Details</b><span class="c">&rsaquo;</span><b>Contract Details</b><span class="c">&rsaquo;</span><b>set Stage to Closed Won</b></div><ol class="steps">
     <li>Fill in the <b>Contract Details</b> &mdash; start date, end date, term, payment terms, billing frequency.</li>
     <li>Set the stage to <b>Closed Won</b>.</li>
     <li>Add a <b>Win Reason</b> and a note on why you won, while it's fresh.</li>
-  </ol>
+  </ol><figure><img src="shots/contract_section.png" alt="Fill this in before you close the deal &mdash; these five fields are what next year's renewal gets built from." loading="lazy"><figcaption>Fill this in <b>before</b> you close the deal &mdash; these five fields are what next year's renewal gets built from.</figcaption></figure><figure><img src="shots/renewal_created.png" alt="And this is the renewal, created on its own the moment the deal closed, with the products already on it." loading="lazy"><figcaption>And this is the renewal, created on its own the moment the deal closed, with the products already on it.</figcaption></figure>
   <div class="auto">
     <h3>Then Salesforce does the rest</h3>
     <ul>
@@ -359,7 +364,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
     <li>Set the stage to <b>Closed Lost</b>.</li>
     <li>Pick a <b>Win / Loss Reason</b> &mdash; this one is required.</li>
     <li>Add a note with anything worth knowing if we go back in.</li>
-  </ol>
+  </ol><figure><img src="shots/outcome_section.png" alt="The Outcome section. Reason and notes &mdash; thirty seconds now, and the win/loss review actually has something to work with." loading="lazy"><figcaption>The Outcome section. Reason and notes &mdash; thirty seconds now, and the win/loss review actually has something to work with.</figcaption></figure>
   <div class="heads">
     <h3>Why the reason is compulsory</h3>
     <p>It is the only thing a win/loss review has to work with. "Competitor Won" with a note saying who and why is worth more than a tidy pipeline.</p>
@@ -371,7 +376,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <section class="task" id="expand">
   <h2>I want to sell more to a customer</h2>
   <p class="who">Account Executive</p>
-  <ol class="steps">
+  <div class="nav"><span class="lbl">Click path</span><b>the account</b><span class="c">&rsaquo;</span><b>New Opportunity</b><span class="c">&rsaquo;</span><b>record type Expansion</b><span class="c">&rsaquo;</span><b>Co-Term with Renewal</b></div><ol class="steps">
     <li>Create an opportunity on the account and set the record type to <b>Expansion</b>.</li>
     <li>Add the products they're buying.</li>
     <li>If they already have a renewal coming up, click <b>Co-Term with Renewal</b>.</li>
@@ -396,7 +401,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <section class="task" id="morning">
   <h2>What should I check each morning?</h2>
   <p class="who">Everyone</p>
-  <p>Four lists. None of them take longer than a minute.</p>
+  <p>Four lists. None of them take longer than a minute.</p><div class="nav"><span class="lbl">Click path</span><b>Opportunities</b><span class="c">&rsaquo;</span><b>the list-view dropdown</b><span class="c">&rsaquo;</span><b>pick a list</b></div>
   <figure>
     <img src="shots/listview.png" alt="The Deals Needing Attention list view" loading="lazy">
     <figcaption><b>Deals Needing Attention</b> &mdash; anything you haven't updated the next step on in over a week appears here by itself.</figcaption>
@@ -412,7 +417,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
   <figure>
     <img src="shots/engagement.png" alt="The engagement section on an account showing 95 days since sales activity and 5 days since marketing activity" loading="lazy">
     <figcaption>Sales and marketing activity are tracked separately on purpose. This account looks active &mdash; but nobody in sales has spoken to them for 95 days.</figcaption>
-  </figure>
+  </figure><figure><img src="shots/cold_accounts.png" alt="The Cold Accounts list does the same job across your whole book, sorted worst-first." loading="lazy"><figcaption>The <b>Cold Accounts</b> list does the same job across your whole book, sorted worst-first.</figcaption></figure><figure><img src="shots/dashboard.png" alt="And the leadership dashboard, if you want the whole picture in one screen." loading="lazy"><figcaption>And the leadership dashboard, if you want the whole picture in one screen.</figcaption></figure>
   <div class="try">
     <span class="lbl">Leadership</span>
     <a class="btn" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Dashboard/01ZQL00000ALBNi2AP/view" target="_blank" rel="noopener">Sales Leadership dashboard</a>
