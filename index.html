@@ -148,6 +148,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
     <li><a href="#new">I've got a new lead</a></li>
     <li><a href="#met">I've had the meeting</a></li>
     <li><a href="#move">I'm moving a deal forward</a></li>
+    <li><a href="#people">Who else is in this deal?</a></li>
     <li><a href="#blocked">Salesforce won't let me move my deal</a></li>
     <li><a href="#poc">I'm running a POC</a></li>
     <li><a href="#approval">I need pricing approved</a></li>
@@ -155,6 +156,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
     <li><a href="#lost">I've lost the deal</a></li>
     <li><a href="#expand">I want to sell more to a customer</a></li>
     <li><a href="#morning">What should I check each morning?</a></li>
+    <li><a href="#env">Where do I record what they run?</a></li>
     <li><a href="#fields">What is this field for?</a></li>
     <li><a href="#changed">What changed from Monica</a></li>
   </ol>
@@ -220,8 +222,8 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
   <p>Here is what each stage needs before you can leave it. Nothing else is enforced &mdash; fill in the rest as you learn it.</p>
   <div class="tw"><table>
     <tr><th>Stage</th><th>Before you can move on</th></tr>
-    <tr><td class="k">Discovery</td><td>Business Qualification set to <b>Qualified</b>, and the <b>Pain Point</b> written down</td></tr>
-    <tr><td class="k">Technical Validation</td><td>Technical Qualification <b>Qualified</b>, BANT <b>75%+</b>, plus Amount, Close Date and Champion</td></tr>
+    <tr><td class="k">Discovery</td><td>Business Qualification showing <b>Qualified</b> &mdash; it sets itself, and the <b>Pain Point</b> written down</td></tr>
+    <tr><td class="k">Technical Validation</td><td>Technical Qualification <b>Qualified</b>, BANT <b>50%+</b>, plus Amount, Close Date and Champion</td></tr>
     <tr><td class="k">Proof of Concept</td><td>Record the <b>Tech Win</b> result &mdash; yes or no, with a reason</td></tr>
     <tr><td class="k">Negotiations</td><td>Pricing <b>approved</b> (see below)</td></tr>
     <tr><td class="k">Security Review / Procurement</td><td>Nothing enforced &mdash; move it when the contract is signed</td></tr>
@@ -229,7 +231,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
   </table></div>
   <figure>
     <img src="shots/bant.png" alt="The BANT section showing budget, authority, need and timeline with a 75 percent score" loading="lazy">
-    <figcaption>BANT only counts answers marked <b>Confirmed</b>. <code>Estimated</code> and <code>Partial</code> score zero &mdash; three out of four gets you to 75%.</figcaption>
+    <figcaption>BANT only counts answers marked <b>Confirmed</b>. <code>Estimated</code> and <code>Partial</code> score zero &mdash; two out of four gets you to 50%, which is the bar.</figcaption>
   </figure><figure><img src="shots/techqual.png" alt="The Technical Qualification section, filled in by your SE. You do not need to complete this yourself &mdash; but the deal cannot reach POC until they have." loading="lazy"><figcaption>The Technical Qualification section, filled in by your SE. You do not need to complete this yourself &mdash; but the deal cannot reach POC until they have.</figcaption></figure>
   <div class="auto">
     <h3>Salesforce does this for you</h3>
@@ -247,6 +249,26 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
 <hr class="rule">
 
 <!-- 4 -->
+<section class="task" id="people">
+  <h2>Who else is in this deal?</h2>
+  <p class="who">Account Executive &amp; Sales Engineer</p>
+  <p>One champion is never the whole story. Contact Roles are where you record everyone else who matters &mdash; the person who signs, the one who runs security review, the one who will actually use it.</p>
+  <div class="nav"><span class="lbl">Click path</span><b>open the deal</b><span class="c">&rsaquo;</span><b>Related</b><span class="c">&rsaquo;</span><b>Contact Roles</b><span class="c">&rsaquo;</span><b>Add Contact Roles</b></div>
+  <ol class="steps">
+    <li>Add every person you have actually spoken to. A name with no role is still better than a name you never wrote down.</li>
+    <li>Give each of them a <b>Role</b>. Decision Maker, Economic Buyer, Technical Buyer, Evaluator and so on.</li>
+    <li>Mark one of them <b>Champion</b>.</li>
+  </ol>
+  <div class="auto">
+    <h3>Salesforce does this for you</h3>
+    <ul>
+      <li>Setting someone as <b>Champion</b> fills in the Champion field on the deal for you &mdash; which is one of the things the POC gate is looking for. You don't set it twice.</li>
+      <li>Pulls each person's job title and time zone through from their contact record, so you can see at a glance who you can call before lunch.</li>
+    </ul>
+  </div>
+  <p><b>Buyer persona and user persona</b> are on each contact role too. They're empty for now &mdash; Corridor is still deciding the list &mdash; so leave them until we've agreed the values.</p>
+</section>
+
 <section class="task" id="blocked">
   <h2>Salesforce won't let me move my deal</h2>
   <p class="who">Everyone &mdash; read this one</p>
@@ -257,12 +279,15 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
   </figure>
   <div class="tw"><table>
     <tr><th>If it says</th><th>Do this</th></tr>
-    <tr><td class="k">Both qualification gates must be Qualified</td><td>Set <b>Business Qualification</b> yourself. Ask your SE to set <b>Technical Qualification</b> &mdash; it is their call, not yours.</td></tr>
-    <tr><td class="k">BANT must be at least 75%</td><td>You need three of the four marked <b>Confirmed</b>. Check the BANT section &mdash; <code>Estimated</code> doesn't count.</td></tr>
+    <tr><td class="k">Both qualification gates must be Qualified</td><td><b>Business Qualification sets itself.</b> It flips to Qualified once two of the four BANT are Confirmed and a Champion is named &mdash; so fix those, not the field. Technical Qualification is your SE's call.</td></tr>
+    <tr><td class="k">BANT must be at least 50%</td><td>You need two of the four marked <b>Confirmed</b>. Check the BANT section &mdash; <code>Estimated</code> doesn't count.</td></tr>
     <tr><td class="k">Amount must be populated</td><td>Put in your best number. It can change later.</td></tr>
     <tr><td class="k">Close Date must be populated</td><td>It cannot be in the past.</td></tr>
     <tr><td class="k">Champion must be populated</td><td>Pick the contact who is arguing for you internally.</td></tr>
     <tr><td class="k">Pain Point must be populated</td><td>Write what is actually broken for them, in their words. No pain, no deal.</td></tr>
+    <tr><td class="k">Contract start and end dates must be populated</td><td>You are closing a deal won. Those two dates build next year&rsquo;s renewal and the account record, so they are asked for now rather than chased later.</td></tr>
+    <tr><td class="k">Give a reason when you override</td><td>You ticked the Business Qualification override. Say why in a line &mdash; it is the only record of that judgement call.</td></tr>
+    <tr><td class="k">Developers In Scope cannot exceed the account total</td><td>Check <b>Total Developers</b> on the account. If that number is wrong, fix it there &mdash; it lives on the account now, not the deal.</td></tr>
     <tr><td class="k">Pricing approval is required</td><td>Submit for approval and wait for the decision &mdash; see below.</td></tr>
     <tr><td class="k">Record a Win / Loss Reason</td><td>You're closing it lost and haven't said why.</td></tr>
   </table></div>
@@ -335,13 +360,14 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
     <li>Fill in the <b>Contract Details</b> &mdash; start date, end date, term, payment terms, billing frequency.</li>
     <li>Set the stage to <b>Closed Won</b>.</li>
     <li>Add a <b>Win Reason</b> and a note on why you won, while it's fresh.</li>
-  </ol><figure><img src="shots/contract_section.png" alt="Fill this in before you close the deal &mdash; these five fields are what next year's renewal gets built from." loading="lazy"><figcaption>Fill this in <b>before</b> you close the deal &mdash; these five fields are what next year's renewal gets built from.</figcaption></figure><figure><img src="shots/renewal_created.png" alt="And this is the renewal, created on its own the moment the deal closed, with the products already on it." loading="lazy"><figcaption>And this is the renewal, created on its own the moment the deal closed, with the products already on it.</figcaption></figure>
+  </ol><figure><img src="shots/contract_section.png" alt="<b>Salesforce now stops you closing without the start and end dates.</b> They are what next year&rsquo;s renewal gets built from, and they stamp onto the account as the live contract term." loading="lazy"><figcaption>Fill this in <b>before</b> you close the deal &mdash; these five fields are what next year's renewal gets built from.</figcaption></figure><figure><img src="shots/renewal_created.png" alt="And this is the renewal, created on its own the moment the deal closed, with the products already on it." loading="lazy"><figcaption>And this is the renewal, created on its own the moment the deal closed, with the products already on it.</figcaption></figure>
   <div class="auto">
     <h3>Then Salesforce does the rest</h3>
     <ul>
       <li>Creates next year's <b>renewal opportunity</b>, dated from the end of this contract.</li>
       <li>Copies every product line onto it with the right dates. You don't rebuild the deal.</li>
-      <li>Posts the win to the team.</li>
+      <li>Flips the account from <b>Prospect</b> to <b>Customer</b>, and copies the contract dates onto it.
+      </li><li>Posts the win to the team.</li>
       <li>Tells the office manager to send the customer their swag, with the address.</li>
     </ul>
   </div>
@@ -388,7 +414,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
   </figure>
   <div class="heads">
     <h3>Do this rather than co-terming by hand</h3>
-    <p>Lining up dates manually is where expansion revenue usually gets mis-dated &mdash; and it's the customer who notices, on their invoice.</p>
+    <p>Lining up dates manually is where expansion revenue usually gets mis-dated &mdash; and it's the customer who notices, on their invoice.</p><p><b>Don't wait to be asked.</b> Every deal records how many of a customer's developers it actually covers. <b>Developer Coverage</b> is that number against the company total, and anything under 100% is room you already sold into once. Basalt Security is on 45% &mdash; 461 of 1,025 developers &mdash; so there are 564 sitting outside the contract. The <b>Expansion Whitespace</b> tile on the leadership dashboard is that list, sorted by the size of the gap.</p>
   </div>
   <div class="try">
     <span class="lbl">Try it</span>
@@ -418,15 +444,39 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
     <img src="shots/engagement.png" alt="The engagement section on an account showing 95 days since sales activity and 5 days since marketing activity" loading="lazy">
     <figcaption>Sales and marketing activity are tracked separately on purpose. This account looks active &mdash; but nobody in sales has spoken to them for 95 days.</figcaption>
   </figure><figure><img src="shots/cold_accounts.png" alt="The Cold Accounts list does the same job across your whole book, sorted worst-first." loading="lazy"><figcaption>The <b>Cold Accounts</b> list does the same job across your whole book, sorted worst-first.</figcaption></figure><figure><img src="shots/dashboard.png" alt="And the leadership dashboard, if you want the whole picture in one screen." loading="lazy"><figcaption>And the leadership dashboard, if you want the whole picture in one screen.</figcaption></figure>
+  <p><b>Mission Control</b> is the one on the wall. Three blocks, left to right: <b>GOALS</b> &mdash; live ARR and where each rep is against their number. <b>KUDOS</b> &mdash; what the team opened and closed this week, by name. <b>FOCUS</b> &mdash; who is live in a POV right now, how many days they have been running, and which SE owns them. If a POV is past its target end date it is visible from across the room, which is the point.</p>
+  <figure><img src="shots/mission_control.png" alt="Mission Control: GOALS, KUDOS and FOCUS across three columns, with live ARR, wins this week and who is in a POV." loading="lazy"><figcaption><b>Mission Control</b> &mdash; GOALS on the left, KUDOS underneath, FOCUS on the right. Live ARR, who closed what this week, and which customers are mid-POV.</figcaption></figure>
   <div class="try">
     <span class="lbl">Leadership</span>
-    <a class="btn" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Dashboard/01ZQL00000ALBNi2AP/view" target="_blank" rel="noopener">Sales Leadership dashboard</a>
+    <a class="btn" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Dashboard/01ZQL00000AVtaL2AT/view" target="_blank" rel="noopener">Mission Control</a>
+    <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/r/Dashboard/01ZQL00000ALBNi2AP/view" target="_blank" rel="noopener">Sales Leadership dashboard</a>
     <a class="btn ghost" href="https://ruby-innovation-7035.scratch.lightning.force.com/lightning/o/Report/home" target="_blank" rel="noopener">All reports</a>
   </div>
 </section>
 <hr class="rule">
 
 <!-- 11 -->
+<section class="task" id="env">
+  <h2>Where do I record what they run?</h2>
+  <p class="who">Sales Engineer</p>
+  <p><b>This moved on 23 September.</b> What a company runs &mdash; their coding agents, IDEs, operating systems, MDM, repositories, the security tooling they already have &mdash; now lives on the <b>account</b>, not the deal.</p>
+  <div class="nav"><span class="lbl">Click path</span><b>the account</b><span class="c">&rsaquo;</span><b>Details</b><span class="c">&rsaquo;</span><b>Technical Environment</b></div>
+  <p>Why: it describes the company, not one deal. Put it on the account once and it is right on the renewal, the expansion and every other opportunity you open there &mdash; instead of being re-typed each time and drifting apart.</p>
+  <figure><img src="shots/account_env.png" alt="An account record showing Firmographics and ICP, Technical Environment and Contract sections." loading="lazy"><figcaption>Aperture Systems. Note <b>Coding Agents Used</b> &mdash; Claude Code local <em>and</em> cloud, plus Cursor both ways. One field, nothing lost.</figcaption></figure>
+  <table class="tw">
+    <tr><th>On the account</th><th>Still on the deal</th></tr>
+    <tr><td>Coding Agents Used &middot; IDEs &middot; Operating Systems &middot; Mobile Device Management &middot; Code Repository Type &middot; Current SAST / SCA Stack &middot; Autonomy Level &middot; Total Developers</td>
+        <td>Developers In Scope &middot; Developer Coverage &middot; Corridor Deployment Model &middot; Project Identified &middot; Technical Qualification and its notes</td></tr>
+  </table>
+  <div class="auto">
+    <h3>Worth knowing</h3>
+    <ul>
+      <li><b>Coding agents now include where they run.</b> One value each: <em>Claude Code (Local)</em>, <em>Claude Code (Cloud)</em>, <em>Cursor (Cloud)</em>. A customer running the same agent both ways is no longer something the record can't express.</li>
+      <li>The deal shows <b>Total Developers</b> and <b>Autonomy Level</b> read-only. To change them, go to the account &mdash; that is where the truth lives.</li>
+    </ul>
+  </div>
+</section>
+
 <section class="task" id="fields">
   <h2>What is this field for?</h2>
   <p class="who">Reference</p>
@@ -439,7 +489,7 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
     <tr><td class="k">Autonomy Level</td><td>How autonomous their development flow is today</td><td>SE</td></tr>
     <tr><td class="k">Current SAST / SCA Stack</td><td>What security tooling they already run</td><td>SE</td></tr>
     <tr><td class="k">BANT &mdash; the four</td><td>Only <b>Confirmed</b> counts toward the score</td><td>AE, or Gong</td></tr>
-    <tr><td class="k">BANT Score</td><td>Worked out for you. 75% is the bar for a POC</td><td>Automatic</td></tr>
+    <tr><td class="k">BANT Score</td><td>Worked out for you. 50% is the bar for a POC</td><td>Automatic</td></tr>
     <tr><td class="k">Champion</td><td>Who is arguing for you when you're not in the room</td><td>AE</td></tr>
     <tr><td class="k">Next Step</td><td>The single next thing that has to happen</td><td>AE</td></tr>
     <tr><td class="k">Days in Current Stage</td><td>How long it's sat there</td><td>Automatic</td></tr>
@@ -448,6 +498,12 @@ code{font-family:var(--mono);font-size:.87em;background:var(--paper2);border-rad
     <tr><td class="k">Contract dates</td><td>Build next year's renewal &mdash; get them right</td><td>AE</td></tr>
     <tr><td class="k">Win / Loss Reason</td><td>Why it went the way it did</td><td>AE</td></tr>
     <tr><td class="k">Last Sales Activity</td><td>When someone in sales last spoke to them</td><td>Automatic</td></tr>
+    <tr><td class="k">SE Owner</td><td>The SE on this deal. Copied from the account when the deal is created, then left alone &mdash; change it here if cover changes</td><td>AE</td></tr>
+    <tr><td class="k">Corridor Deployment Model</td><td>What the customer wants: multitenant, single tenant, EU single tenant</td><td>SE</td></tr>
+    <tr><td class="k">Developers In Scope</td><td>How many of their developers this deal covers &mdash; often not all of them</td><td>AE</td></tr>
+    <tr><td class="k">Developer Coverage</td><td>In scope against the company total. Under 100% is your expansion room</td><td>Automatic</td></tr>
+    <tr><td class="k">Total Seats</td><td>Adds up the licences on the deal, and puts the seat count in the deal name</td><td>Automatic</td></tr>
+    <tr><td class="k">Business Qualification</td><td>Sets itself from BANT and the Champion. Override it if you must, but say why</td><td>Automatic</td></tr>
   </table></div>
 </section>
 <hr class="rule">
